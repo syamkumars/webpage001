@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- slider -->
+
+<link rel="stylesheet" type="text/css"
+	href="css/wallop/wallop-slider.css">
+<link rel="stylesheet" type="text/css"
+	href="css/wallop/wallop-slider--fade.css">
+<link rel="stylesheet" type="text/css"
+	href="css/wallop/wallop-slider--slide.css">
+<link rel="stylesheet" type="text/css"
+	href="css/wallop/wallop-slider--fold.css">
+<link rel="stylesheet" type="text/css"
+	href="css/wallop/wallop-slider--custom.css">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<div id="tester"></div>
+	<div class="main1">
+		<div id="Home" style="height: 700px;">
+			<div class="title title_odd">
+				<h1>Clazzic Trouble</h1>
+			</div>
+			<div class="menu-main" style="position: relative; top: -5px;">
+				<ul>
+					<li class="menu-main-item"><a onclick="smoothScroll('Home');">Home</a></li>
+					<li class="menu-main-item"><a
+						onclick="smoothScroll('anchor-2');">anchor-2</a></li>
+					<li class="menu-main-item"><a
+						onclick="smoothScroll('anchor-3');">anchor-3</a></li>
+					<li class="menu-main-item"><a
+						onclick="smoothScroll('anchor-4');">anchor-4</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<div id="div_slider" class="wallop-slider wallop-slider--custom"
+					style="background-color: blue;">
+
+					<ul class="wallop-slider__list">
+						<li class="wallop-slider__item wallop-slider__item--current"><img
+							src="img/1.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/2.jpg"></li>
+						<li class="wallop-slider__item"><img src="img/3.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/4.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/5.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/6.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/7.jpg"></li>
+						<li class="wallop-slider__item "><img src="img/8.jpg"></li>
+					</ul>
+					<div
+						style="top: -210px; background-color: yellowgreen; position: relative; text-align: center;">
+						<button class="wallop-slider__btn wallop-slider__btn--previous">Previous</button>
+						<button class="wallop-slider__btn wallop-slider__btn--next">Next</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="anchor-2" style="height: 700px; background-color: red;">
+			<div class="title title_even"></div>
+		</div>
+
+		<div id="anchor-3" style="height: 700px;">
+			<div class="title title_odd"></div>
+			<h2>Anchor 3</h2>
+			<div style="height: 180px;"></div>
+		</div>
+
+		<div id="anchor-4" style="height: 250px; background-color: red; display: block; overflow: hidden;" >
+<!-- 			<div  class="title title_even"><h3 id="anchor-4">FOOTER</h3></div> -->
+			<div class="sitemap">
+				
+				<ul style="margin: 0px; padding: 0px;">
+					<li class="sitemap_immobile"><a onclick="smoothScroll('Home');">Home</a><div class="sitemap_mobile"></div></li> 
+					<li class="sitemap_immobile"><a onclick="smoothScroll('anchor-2');">anchor-2</a><div class="sitemap_mobile"></div></li>
+					<li class="sitemap_immobile"><a onclick="smoothScroll('anchor-3');">anchor-3</a><div class="sitemap_mobile"></div></li> 
+					<li class="sitemap_immobile"><a onclick="smoothScroll('anchor-4');">anchor-4</a><div class="sitemap_mobile"></div></li>
+				</ul>
+			</div>
+			<p>"There is not now, and never will be, a language in which it is the least bit difficult to write bad programs."</p>
+			<div class="social">
+				<div><a class="facebook"  href="http://facebook.com/" target="_blank" >facebook</a></div>
+				<div><a class="twitter"  href="http://twitter.com/" target="_blank">twitter</a></div>
+				<div><a class="youtube"  href="http://youtube.com/" target="_blank">YouTube</a></div>
+			</div>
+		</div>
+		
+		
+	</div>
+
+
+
+
+
+
+
+	<script src="js/WallopSlider.js"></script>
+	<script>
+		var slider = new WallopSlider('.wallop-slider', {
+			wSBtnPreviousClass : 'wallop-slider__btn--previous',
+			wSBtnNextClass : 'wallop-slider__btn--next',
+			wSItemClass : 'wallop-slider__item',
+			wSCurrentItemClass : 'wallop-slider__item--current',
+			wSShowPreviousClass : 'wallop-slider__item--show-previous',
+			wSShowNextClass : 'wallop-slider__item--show-next',
+			wSHidePreviousClass : 'wallop-slider__item--hide-previous',
+			wSHideNextClass : 'wallop-slider__item--hide-next',
+			wsCarousel : false
+		});
+		//add click handler
+	</script>
+	<script>
+		//scrolling 
+		function currentYPosition() {
+			// Firefox, Chrome, Opera, Safari
+			if (self.pageYOffset)
+				return self.pageYOffset;
+			// Internet Explorer 6 - standards mode
+			if (document.documentElement && document.documentElement.scrollTop)
+				return document.documentElement.scrollTop;
+			// Internet Explorer 6, 7 and 8
+			if (document.body.scrollTop)
+				return document.body.scrollTop;
+			return 0;
+		}
+
+		function elmYPosition(eID) {
+			var elm = document.getElementById(eID);
+			var y = elm.offsetTop;
+			var node = elm;
+			while (node.offsetParent && node.offsetParent != document.body) {
+				node = node.offsetParent;
+				y += node.offsetTop;
+			}
+			return y;
+		}
+
+		function smoothScroll(eID) {
+			var startY = currentYPosition();
+			var stopY = elmYPosition(eID);
+			var distance = stopY > startY ? stopY - startY : startY - stopY;
+			var speed = (distance / 1000);
+			if (speed >= 1)
+				speed = 1;
+			var step = Math.round(distance / 500);
+			if (step <= 0)
+				step = 1;
+			var leapY = stopY > startY ? startY + step : startY - step;
+			var timer = 10;
+			if (stopY > startY) {
+				for ( var i = startY; i < stopY; i += step) {
+					setTimeout("window.scrollTo(0, " + leapY + ")", timer
+							* speed);
+					leapY += step;
+					if (leapY > stopY)
+						leapY = stopY;
+					timer++;
+				}
+				return;
+			}
+			for ( var i = startY; i > stopY; i -= step) {
+				setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+				leapY -= step;
+				if (leapY < stopY)
+					leapY = stopY;
+				timer++;
+			}
+			return;
+		}
+	</script>
+
+	<script type="text/javascript">
+			document.getElementById("tester").style.position="fixed";
+			document.getElementById("tester").style.width="50px";
+			document.getElementById("tester").style.height="60px";
+ 			document.getElementById("tester").style.zIndex=5;
+			document.getElementById("tester").style.background="blue";
+			document.getElementById("tester").style.pointerEvents="none";
+			
+			var positionfn= function(event) {
+				document.getElementById("tester").style.top=window.event.clientY+"px";
+				document.getElementById("tester").style.left=window.event.clientX+"px";
+			}
+		
+			document.addEventListener("mousemove", positionfn);
+			
+		</script>
+</body>
+</html>
